@@ -8,9 +8,9 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 
-	_ "github.com/jinzhu/gorm/dialects/mysql"    //mysql database driver
+	_ "github.com/jinzhu/gorm/dialects/mysql" //mysql database driver
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	_"github.com/employee/models"
+	"github.com/neerajsatineosoft/employee/models"
 )
 
 type Server struct {
@@ -43,10 +43,8 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 		}
 	}
 
-
 	//database migration
-	server.DB.Debug().AutoMigrate(&models.Registration{})
-	
+	server.DB.Debug().AutoMigrate(&models.User{})
 
 	server.Router = mux.NewRouter()
 

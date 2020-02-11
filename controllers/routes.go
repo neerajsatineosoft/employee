@@ -1,8 +1,8 @@
 package controllers
 
-import "github.com/employee/middlewares"
+import "github.com/neerajsatineosoft/employee/middlewares"
 
-func (s *Server) InitializeRoutes() {
+func (s *Server) initializeRoutes() {
 
 	// Home Route
 	s.Router.HandleFunc("/", middlewares.SetMiddlewareJSON(s.Home)).Methods("GET")

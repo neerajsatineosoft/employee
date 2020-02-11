@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/employee/auth"
-	"github.com/employee/models"
-	"github.com/employee/responses"
 	"github.com/gorilla/mux"
+	"github.com/neerajsatineosoft/employee/auth"
+	"github.com/neerajsatineosoft/employee/models"
+	"github.com/neerajsatineosoft/employee/responses"
 	//helper"github.com/employee/helpers"
 )
 
@@ -43,6 +43,19 @@ func (server *Server) Registration(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Location", fmt.Sprintf("%s%s/%d", r.Host, r.RequestURI, userCreated.Id))
 	responses.JSON(w, http.StatusCreated, userCreated)
+}
+
+func (server *Server) Login(w http.ResponseWriter, r *http.Request) {
+
+	requestUser := new(models.Login)
+	decoder := json.NewDecoder(r.Body)
+	decoder.Decode(&requestUser)
+
+	responseStatus, token := models.Login(requestUser)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(responseStatus)
+	w.Write(token)
+
 }
 
 func (server *Server) GetUsers(w http.ResponseWriter, r *http.Request) {

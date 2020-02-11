@@ -37,10 +37,6 @@ func (u *User) Validate(action string) error {
 		if u.Password == "" {
 			return errors.New("Required password")
 		}
-		// 		if e.Birthdate == "" {
-		// 			return errors.New("Required Birthdate")
-		// 		}
-
 	default:
 		if u.Email == "" {
 			return errors.New("Required Email")

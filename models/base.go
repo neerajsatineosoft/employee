@@ -6,9 +6,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/jinzhu/gorm"
-
-	"github.com/employee/controllers"
 )
 
 type Server struct {
@@ -19,7 +16,7 @@ func (server *Server) Initialize() {
 
 	server.Router = mux.NewRouter()
 
-	server.InitializeRoutes()
+	server.initializeRoutes()
 }
 
 func (server *Server) Run(addr string) {

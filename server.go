@@ -1,12 +1,12 @@
-package api
+package employee
 
 import (
 	"fmt"
 	"log"
 	"os"
 
-	"github.com/employee/controllers"
 	"github.com/joho/godotenv"
+	"github.com/neerajsatineosoft/employee/controllers"
 )
 
 var server = controllers.Server{}
