@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/neerajsatineosoft/employee/controllers"
+	"github.com/neerajsatineosoft/neostore/controllers"
 )
 
 var server = controllers.Server{}

@@ -1,4 +1,4 @@
-package controllers
+package models
 
 import (
 	"fmt"
@@ -7,10 +7,10 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	"github.com/neerajsatineosoft/neostore/models"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql" //mysql database driver
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/neerajsatineosoft/employee/models"
 )
 
 type Server struct {

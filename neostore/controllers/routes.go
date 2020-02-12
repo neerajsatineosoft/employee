@@ -1,6 +1,6 @@
 package controllers
 
-import "github.com/neerajsatineosoft/employee/middlewares"
+import "github.com/neerajsatineosoft/neostore/middlewares"
 
 func (s *Server) initializeRoutes() {
 

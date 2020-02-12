@@ -9,9 +9,9 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/neerajsatineosoft/employee/auth"
-	"github.com/neerajsatineosoft/employee/models"
-	"github.com/neerajsatineosoft/employee/responses"
+	"github.com/neerajsatineosoft/neostore/auth"
+	"github.com/neerajsatineosoft/neostore/models"
+	"github.com/neerajsatineosoft/neostore/responses"
 	//helper"github.com/employee/helpers"
 )
 
