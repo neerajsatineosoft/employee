@@ -7,7 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	"github.com/neerajsatineosoft/neostore/models"
+	"github.com/neerajsatineosoft/employee/neostore/models"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql" //mysql database driver
 	_ "github.com/jinzhu/gorm/dialects/postgres"

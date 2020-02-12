@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/neerajsatineosoft/neostore/models"
 )
 
 type Server struct {

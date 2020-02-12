@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/neerajsatineosoft/neostore/auth"
-	"github.com/neerajsatineosoft/neostore/responses"
+	"github.com/neerajsatineosoft/employee/neostore/auth"
+	"github.com/neerajsatineosoft/employee/neostore/responses"
 )
 
 func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {

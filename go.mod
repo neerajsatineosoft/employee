@@ -10,5 +10,5 @@ require (
 	github.com/gosimple/slug v1.9.0 // indirect
 	github.com/jinzhu/gorm v1.9.12
 	github.com/joho/godotenv v1.3.0
-	github.com/neerajsatineosoft/neostore v0.0.0-20200207022153-19e2fbed052f
+	github.com/neerajsatineosoft/employee/neostore v0.0.0-20200207022153-19e2fbed052f
 )

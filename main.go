@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/neerajsatineosoft/neostore"
+	"github.com/neerajsatineosoft/employee/neostore"
 )
 
 func main() {
