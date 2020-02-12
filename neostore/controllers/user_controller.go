@@ -12,10 +12,10 @@ import (
 	"github.com/neerajsatineosoft/employee/neostore/auth"
 	"github.com/neerajsatineosoft/employee/neostore/models"
 	"github.com/neerajsatineosoft/employee/neostore/responses"
-	//helper"github.com/employee/helpers"
+	"github.com/neerajsatineosoft/employee/neostore/utils/formaterror"
 )
 
-func (server *Server) Registration(w http.ResponseWriter, r *http.Request) {
+func (server *Server) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -33,29 +33,17 @@ func (server *Server) Registration(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
-	userCreated, err := user.CreateUser(server.DB)
+	userCreated, err := user.SaveUser(server.DB)
 
 	if err != nil {
-		fmt.Println("Error in saving user")
 
-		responses.ERROR(w, http.StatusInternalServerError, errors.New("Error in saving user details"))
+		formattedError := formaterror.FormatError(err.Error())
+
+		responses.ERROR(w, http.StatusInternalServerError, formattedError)
 		return
 	}
-	w.Header().Set("Location", fmt.Sprintf("%s%s/%d", r.Host, r.RequestURI, userCreated.Id))
+	w.Header().Set("Location", fmt.Sprintf("%s%s/%d", r.Host, r.RequestURI, userCreated.ID))
 	responses.JSON(w, http.StatusCreated, userCreated)
-}
-
-func (server *Server) Login(w http.ResponseWriter, r *http.Request) {
-
-	requestUser := new(models.Login)
-	decoder := json.NewDecoder(r.Body)
-	decoder.Decode(&requestUser)
-
-	responseStatus, token := models.Login(requestUser)
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(responseStatus)
-	w.Write(token)
-
 }
 
 func (server *Server) GetUsers(w http.ResponseWriter, r *http.Request) {
@@ -115,16 +103,16 @@ func (server *Server) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New(http.StatusText(http.StatusUnauthorized)))
 		return
 	}
-	// user.Prepare()
-	// err = user.Validate("update")
-	// if err != nil {
-	// 	responses.ERROR(w, http.StatusUnprocessableEntity, err)
-	// 	return
-	// }
-	updatedUser, err := user.UpdateUser(server.DB, uint32(uid))
+	user.Prepare()
+	err = user.Validate("update")
 	if err != nil {
-		fmt.Println("Error in Updating user")
-		responses.ERROR(w, http.StatusInternalServerError, errors.New("Error in updation"))
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
+		return
+	}
+	updatedUser, err := user.UpdateAUser(server.DB, uint32(uid))
+	if err != nil {
+		formattedError := formaterror.FormatError(err.Error())
+		responses.ERROR(w, http.StatusInternalServerError, formattedError)
 		return
 	}
 	responses.JSON(w, http.StatusOK, updatedUser)
@@ -150,7 +138,7 @@ func (server *Server) DeleteUser(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New(http.StatusText(http.StatusUnauthorized)))
 		return
 	}
-	_, err = user.DeleteUser(server.DB, uint32(uid))
+	_, err = user.DeleteAUser(server.DB, uint32(uid))
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
